@@ -1,0 +1,40 @@
+
+// The language-configuration.json file in a VS Code extension defines editor behaviors for your custom language. 
+// While the .tmLanguage.json file defines syntax highlighting, language-configuration.json controls things like:
+
+// Comment Styles (#, //, /* */)
+// Auto-closing pairs (e.g., { }, " " )
+// Indentation Rules
+// Brackets Matching
+// Word Separators for Selection
+// Surrounding Pairs (e.g., wrapping selected text in quotes)
+
+{
+    "comments": {
+        // symbol used for single line comment. Remove this entry if your language does not support line comments
+        "lineComment": "#"
+    },
+    // symbols used as brackets
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    // symbols that are auto closed when typing
+    "autoClosingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"]
+    ],
+    // symbols that can be used to surround a selection
+    "surroundingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"]
+    ],
+    "wordPattern": "[A-Za-z0-9_]+"
+}

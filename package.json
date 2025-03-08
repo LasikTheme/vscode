@@ -21,7 +21,7 @@
     "theme": "dark"
   },
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.98.0"
   },
   "categories": [
     "Themes",
@@ -37,6 +37,51 @@
         "label": "Lasik",
         "uiTheme": "vs-dark",
         "path": "./themes/Lasik-color-theme.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "env",
+        "scopeName": "source.env",
+        "path": "./syntaxes/dotenv/env.tmLanguage"
+      }
+    ],
+    "languages": [
+      {
+        "id": "env",
+        "aliases": [
+          "DotENV",
+          "env",
+          "dotenv"
+        ],
+        "configuration": "./syntaxes/dotenv/language-configuration.json",
+        "extensions": [
+          "..env",
+          "..env.dist",
+          "..env.local",
+          "..env.sample",
+          "..env.example",
+          "..env.template",
+          "..env.test",
+          "..env.test.local",
+          "..env.testing",
+          "..env.dev",
+          "..env.development",
+          "..env.development.local",
+          "..env.prod",
+          "..env.production",
+          "..env.production.local",
+          "..env.dusk.local",
+          "..env.staging",
+          "..env.default",
+          "..env.defaults",
+          "..envrc",
+          "..flaskenv",
+          ".env",
+          ".env.sample",
+          ".env.example",
+          ".env.template"
+        ],
       }
     ],
     "colors": [
