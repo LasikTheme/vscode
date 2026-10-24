@@ -9,3 +9,4 @@ src/
 deno.lock
 deno.json
 *.vsix
+images/v1/**
