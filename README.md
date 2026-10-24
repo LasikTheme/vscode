@@ -46,3 +46,18 @@ This is more readable:
 than this:
 
 ![Normal punctuation colors](./images/normal-punctuation-colors.png)
+
+
+## Built-in language support
+
+The theme comes with syntax highlighting for these file types, so you don't need a separate extension for them:
+
+| Language | Files |
+|---|---|
+| `.env` (dotenv) | `.env`, `.env.local`, `.env.production`, `.env.example`, `.flaskenv` and other `.env.*` files |
+| TOML | `.toml`, `Cargo.lock`, `Pipfile`, `poetry.lock`, `uv.lock` |
+| Assembly (x86 NASM) | `.asm`, `.nasm` |
+| CSV and TSV, rainbow columns | `.csv`, `.tsv`, `.tab` (each column gets its own color) |
+| systemd unit files (INI) | `.service`, `.socket`, `.timer`, `.target`, `.mount`, `.path`, `.network` and others |
+
+If you use Even Better TOML, turn it off to get the Lasik TOML colors (muted quotes). YAML and Makefile highlighting are built into VS Code; the theme only sets their colors.
