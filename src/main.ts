@@ -1,5 +1,6 @@
 import EDITOR_COLORS from "./editorColors.ts"
 import TOKEN_COLORS from "./languageTokens/index.ts"
+import { applyFixes } from "./fixes.ts"
 
 export const lasikFlat = {
   name: "Lasik",
@@ -21,7 +22,7 @@ export const lasikHighContrast = {
 // the current project root is outside src/
 await Deno.writeTextFile(
   "themes/Lasik-color-theme.json",
-  JSON.stringify(lasikFlat)
+  JSON.stringify(applyFixes(lasikFlat)) // hard-coded color fixes, see fixes.ts
 )
 
 // // the file path is relative to the project root
