@@ -153,6 +153,7 @@
     "welcomePage.progress.foreground": "#569cd6",
     "welcomePage.tileBackground": "#2b2b2b",
     "widget.border": "#313131",
+    "editorRuler.foreground": "#2a324b",
     "editorCursor.foreground": "#a8bcfc",
     "editorError.foreground": "#d24e6d",
     "editorWarning.foreground": "#ffd370",

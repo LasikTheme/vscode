@@ -31,6 +31,7 @@ const UI_KEYS: Record<string, string> = {
   "editorLineNumber.foreground": "#6a78a4", // SLATE_MUTED, 4.7:1 (was 1.9)
   "activityBar.inactiveForeground": "#6a78a4", // same, inactive icons (was 1.9)
   "editorIndentGuide.background1": "#4f5a7c", // 3:1, the minimum for UI lines (was 2.0)
+  "editorRuler.foreground": "#2a324b", // SLATE_QUIET, the faint comment color: barely visible, so the ruler doesn't cut through text (was VS Code's gray #5a5a5a)
   "input.placeholderForeground": "#989898", // 4.5:1 on the input background (was 3.3)
   "editor.selectionBackground": "#a8bcfc40", // a bit stronger, so the selection is easy to see
   "editorCursor.foreground": "#a8bcfc",
