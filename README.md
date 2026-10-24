@@ -1,11 +1,22 @@
-# Lasik - Super Dark
-A dark, easy on the eyes theme for Visual Studio Code that has decent contrast for coders with sensitive eyes.
+# Lasik
+
+A dark, easy on the eyes theme for Visual Studio Code, made for sensitive eyes and long reading sessions, with good contrast. Every color comes from the [Lasik palette](https://github.com/LasikTheme/palette).
 
 The theme was developed for personal use by a developer who writes a lot of React, TypeScript, Python, Sass/CSS, HTML and Markdown files.
 
+## Variants
+
+| Theme | For |
+|---|---|
+| **Lasik Dark** | The default. All text meets WCAG AA (4.5:1). |
+| **Lasik Dark Quiet** | Punctuation, line numbers and quotes even dimmer. Opt-in: these go below WCAG on purpose, for people who find them noisy. |
+| **Lasik Dark High Contrast** | Black background and code colors at 7:1 or more (WCAG AAA). |
+
 See other Lasik ports
 
-- [Konsole](https://github.com/aamnah/lasik-konsole-theme)
+- [Konsole](https://github.com/LasikTheme/konsole)
+- [Kitty](https://github.com/LasikTheme/kitty)
+- [Claude Code](https://github.com/LasikTheme/claude-code)
 
 **Installation**
 
@@ -15,15 +26,19 @@ Launch VS Code Quick Open (`Ctrl+P`), paste the following command, and press ent
 ext install AmnaAkram.lasik
 ```
 
-Activate the theme: _Code > Preferences > Color Theme > **Lasik**_
+Activate the theme: _Code > Preferences > Color Theme > **Lasik Dark**_ (or one of the other variants)
 
 ![Screenshot](./images/screenshot.png)
 
 ## Python
 
+Docstrings use the comment color, control keywords and parameters are italic, built-ins are teal, and quotes are dimmed.
+
 ![Python sample](./images/python-sample.png)
 
 ## Markdown
+
+Markup punctuation (`#`, `**`, `_`, `` ` ``, `[ ]`, `>`) is dimmed in the color of what it wraps, and table pipes and dashes step back so the cell text is what you read.
 
 ![Basic Markdown](./images/markdown-basics.png)
 
@@ -31,7 +46,7 @@ Activate the theme: _Code > Preferences > Color Theme > **Lasik**_
 
 ## Bash
 
-Attention was paid to making arithmetic evaluation, command evaluation, variables inside strings, and command names more obvious
+Attention was paid to making arithmetic evaluation, command evaluation, variables inside strings, and command names more obvious.
 
 ![Bash sample](./images/bash-sample.png)
 
