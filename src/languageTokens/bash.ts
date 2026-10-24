@@ -1,4 +1,4 @@
-import { PALETTE, ColorPaletteType } from "../editorColors.ts"
+import { PALETTE, ColorPaletteType } from "../palette.ts"
 import { alpha, opaque } from "../utils.ts"
 
 function generateBashTokens(type: ColorPaletteType) {

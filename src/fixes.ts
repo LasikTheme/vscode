@@ -10,6 +10,7 @@
 // Contrast numbers are against the editor background #01030a.
 
 type Theme = {
+  [key: string]: unknown // name, type, $schema
   colors: Record<string, string>
   tokenColors: { name?: string; scope?: string | string[]; settings: { foreground?: string; fontStyle?: string } }[]
 }
@@ -62,8 +63,8 @@ const UI_KEYS: Record<string, string> = {
   "terminal.ansiMagenta": "#c175ea", // MAUVE
   "terminal.ansiCyan": "#02bbcc", // SAPPHIRE
   "terminal.ansiWhite": "#d1dafa", // LAVENDER
-  "terminal.ansiBrightBlack": "#6e7ca8", // SLATE_BRIGHT, 5.0:1 (shell suggestions, git hints)
-  "terminal.ansiBrightRed": "#ee6885",
+  "terminal.ansiBrightBlack": "#8796c4", // SLATE_BRIGHT, 7.0:1 (shell suggestions, git hints)
+  "terminal.ansiBrightRed": "#f16a87",
   "terminal.ansiBrightGreen": "#b9dda8",
   "terminal.ansiBrightYellow": "#ffeabd",
   "terminal.ansiBrightBlue": "#6fb5f1",
@@ -76,13 +77,16 @@ const UI_KEYS: Record<string, string> = {
 const TOKEN_VALUES: Record<string, string> = {
   "#a1add8b3": "#7583b0", // comments: see-through 4.9:1 -> solid 5.5:1
   "#e95678e6": "#e35d7b", // variables, keys, tags: RED lifted to 6:1
+  "#e95678": "#e35d7b", // same red, solid version
+  "#f9c859": "#ffd370", // Bash $( ) brackets -> YELLOW_DEEP
   "#d24e6d": "#e35d7b", // Markdown headings: same red
   "#000080": "#569cd6", // "header" was navy on black (1.3:1)
+  "#ce6350": "#d98677", // unquoted strings (YAML values etc.) and other string-like tokens -> PEACH (7.5:1)
   "#646695": "#6f72a1", // regexp: 3.8 -> 4.5
   // dimmed punctuation: still quiet, but 4.5:1 (the muted version of the color it belongs to)
-  "#522030": "#c1506a", // JSON key quotes (was 1.6)
+  "#522030": "#338476", // JSON key quotes (was 1.6) -> generated: TEAL mixed into OBSIDIAN to 4.5:1
   "#58423b": "#a5675d", // JSON value quotes (was 2.2)
-  "#6a283c": "#c1506a", // Bash $ (was 1.9)
+  "#6a283c": "#737784", // Bash $ (was 1.9) -> generated: text color mixed into OBSIDIAN to 4.5:1
   "#e956784d": "#c94a69", // Markdown # marks (was 1.4)
   "#e95678b3": "#c94a69", // HTML tag brackets (was 3.3)
   "#67686c": "#737784", // Markdown ** _ ~~ marks (was 3.7)
@@ -114,6 +118,51 @@ const COMMENT_RULE = {
   settings: { foreground: "#7583b0", fontStyle: "" }, // "" = upright, overrides italic from other rules
 }
 
+// Strings are YELLOW (#ffe2a3, 16:1); their quotes are a muted yellow at 4.5:1, so they step back
+// but still pass WCAG AA.
+// generated: YELLOW mixed into OBSIDIAN until 4.5:1 (#837558). Palette gap: no muted yellow at 4.5:1 yet.
+const STRING_QUOTE_RULE = {
+  name: "Quotes around strings, all languages",
+  scope: ["punctuation.definition.string.begin", "punctuation.definition.string.end", "punctuation.definition.string.template"],
+  settings: { foreground: "#837558" },
+}
+
+
+
+// Keys and variables, Dracula-inspired: keys in TEAL, variables in the normal text color.
+// (Red keys and variables read like errors, and they're the most common tokens.)
+const KEY_RULE = {
+  name: "Keys: JSON, JS objects, TOML, YAML",
+  scope: ["support.type.property-name", "meta.object-literal.key", "support.type.property-name.json", "support.type.property-name.toml", "entity.name.tag.yaml"],
+  settings: { foreground: "#4ec9b0" }, // TEAL, 10.1:1
+}
+const VARIABLE_RULE = {
+  name: "Variables",
+  scope: ["variable", "variable.other", "entity.name.variable", "support.variable", "meta.definition.variable.name"],
+  settings: { foreground: "#cdd2e4" }, // LAVENDER_MUTED, the text color
+}
+
+// Quotes around quoted keys ("my key" = 1 in TOML, "my key": 1 in YAML): the muted key red, like JSON key quotes.
+const KEY_QUOTE_RULE = {
+  name: "Quotes around keys (TOML, YAML)",
+  scope: [
+    "punctuation.definition.key.begin.toml",
+    "punctuation.definition.key.end.toml",
+    "meta.map.key.yaml punctuation.definition.string", // VS Code's built-in YAML grammar
+    "meta.flow.map.key.yaml punctuation.definition.string",
+  ],
+  settings: { foreground: "#338476" }, // generated: TEAL mixed into OBSIDIAN to 4.5:1, same as JSON key quotes
+}
+
+// Rainbow CSV / TSV: each column gets its own palette color (see syntaxes/csv/), cycling after 10.
+const RAINBOW = ["#569cd6", "#ffe2a3", "#a0c38f", "#c586c0", "#02bbcc", "#e2a587", "#c175ea", "#4ec9b0", "#fc7e9b", "#4fc1ff"]
+// BLUE, YELLOW, GREEN, PINK, SAPPHIRE, TUMBLEWEED, MAUVE, TEAL, ROSE, SKY: all 4.5:1 or more on OBSIDIAN
+const RAINBOW_RULES = RAINBOW.map((color, i) => ({
+  name: `Rainbow CSV column ${i + 1}`,
+  scope: [`rainbow${i + 1}.csv`, `rainbow${i + 1}.tsv`],
+  settings: { foreground: color },
+}))
+
 export function applyFixes(theme: Theme): Theme {
   const colors: Record<string, string> = {}
   for (const [key, value] of Object.entries(theme.colors)) colors[key] = UI_VALUES[value.toLowerCase()] ?? value
@@ -129,9 +178,86 @@ export function applyFixes(theme: Theme): Theme {
     if (isComment) settings.fontStyle = "" // upright comments
     return { ...rule, settings }
   })
+  // quotes around strings, in every language (TOML, Python, JS, Bash, ...): the Lasik signature.
+  // JSON and Markdown keep their own, more specific quote rules.
+  tokenColors.push(KEY_RULE, VARIABLE_RULE, STRING_QUOTE_RULE, KEY_QUOTE_RULE, ...RAINBOW_RULES)
   // insert the docstring rule right after the comment rule
   const commentIndex = tokenColors.findIndex((r) => Array.isArray(r.scope) && r.scope.includes("comment"))
   tokenColors.splice(commentIndex + 1, 0, COMMENT_RULE)
 
   return { ...theme, colors, tokenColors }
 }
+
+// ---------------------------------------------------------------- variants
+// Lasik Dark Quiet and Lasik Dark High Contrast start from Lasik Dark (applyFixes above)
+// and swap colors. Every swapped-in color is a palette.toml color (name in the comment).
+
+type Variant = { colors?: Record<string, string>; ui?: Record<string, string>; tokens: Record<string, string> }
+
+/** Swap colors by value (UI and syntax), then set single UI keys. */
+function swap(theme: Theme, variant: Variant): Theme {
+  const colors: Record<string, string> = {}
+  for (const [key, value] of Object.entries(theme.colors)) colors[key] = variant.colors?.[value.toLowerCase()] ?? value
+  Object.assign(colors, variant.ui ?? {})
+  const tokenColors = theme.tokenColors.map((rule) => {
+    const fg = rule.settings.foreground?.toLowerCase()
+    return fg && variant.tokens[fg] ? { ...rule, settings: { ...rule.settings, foreground: variant.tokens[fg] } } : rule
+  })
+  return { ...theme, colors, tokenColors }
+}
+
+// Lasik Dark Quiet (opt-in, below WCAG on purpose): punctuation uses the QUIET tier,
+// line numbers and comments are dimmer, variables keep the original RED.
+export const QUIET: Variant = {
+  tokens: {
+    "#338476": "#1c4844", // key quotes -> TEAL_QUIET
+    "#a5675d": "#4d3130", // JSON value quotes -> PEACH_QUIET
+    "#c94a69": "#4a1d2d", // Markdown # marks, HTML tag brackets -> RED_QUIET
+    "#737784": "#4a4e5e", // Markdown ** _ ~~ marks -> LAVENDER_QUIET
+    "#a4655c": "#4d3130", // Markdown ` marks -> PEACH_QUIET
+    "#946d5c": "#503c36", // Markdown link marks -> TUMBLEWEED_QUIET
+    "#5a7d81": "#1c4844", // Markdown reference marks -> TEAL_QUIET
+    "#437aa9": "#1f3951", // Markdown table pipes -> BLUE_QUIET
+    "#5a8149": "#394639", // Markdown blockquote > -> GREEN_QUIET
+    "#7583b0": "#6a78a4", // comments -> SLATE_MUTED (4.7:1)
+    "#e35d7b": "#d24e6d", // variables, keys -> RED
+    "#837558": "#5a5140", // string quotes, all languages -> YELLOW_QUIET
+  },
+  ui: {
+    "editorLineNumber.foreground": "#3c476c", // SLATE (2.3:1)
+    "activityBar.inactiveForeground": "#6a78a4", // SLATE_MUTED
+    "editorIndentGuide.background1": "#2a324b", // SLATE_DEEP
+  },
+}
+
+// Lasik Dark High Contrast: code colors at least 7:1 (the BRIGHT tier), white text,
+// borders around panels (VS Code high contrast themes need contrastBorder).
+export const HIGH_CONTRAST: Variant = {
+  colors: {
+    "#cdd2e4": "#ffffff", // text -> WHITE (allowed in this variant only)
+    "#e8ecfd": "#ffffff",
+  },
+  ui: {
+    "contrastBorder": "#6a78a4", // SLATE_MUTED, 4.7:1
+    "contrastActiveBorder": "#a8bcfc", // PERIWINKLE
+    "editor.foreground": "#ffffff",
+  },
+  tokens: {
+    "#7583b0": "#8796c4", // comments -> SLATE_BRIGHT (7.1:1)
+    "#cdd2e4": "#ffffff", // variables (text color) -> WHITE
+    "#569cd6": "#6fb5f1", // blue -> BLUE_BRIGHT
+    "#6796e6": "#6fb5f1",
+    "#6f72a1": "#6fb5f1", // regexp
+    "#e35d7b": "#f16a87", // red -> RED_BRIGHT (7.0:1)
+    "#f44747": "#f16a87",
+    "#d16969": "#f16a87",
+    "#b877db": "#d893ff", // mauve -> MAUVE_BRIGHT
+    "#c175ea": "#d893ff", // MAUVE (rainbow CSV) -> MAUVE_BRIGHT
+    "#b267e6": "#d893ff",
+    "#808080": "#bbbbbb", // gray tag punctuation -> SILVER
+    "#5f8387": "#71a69b", // Markdown references -> TEAL_MUTED (7.5:1)
+  },
+}
+
+export const toQuiet = (theme: Theme) => swap(theme, QUIET)
+export const toHighContrast = (theme: Theme) => swap(theme, HIGH_CONTRAST)

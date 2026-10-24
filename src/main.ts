@@ -1,38 +1,26 @@
 import EDITOR_COLORS from "./editorColors.ts"
 import TOKEN_COLORS from "./languageTokens/index.ts"
-import { applyFixes } from "./fixes.ts"
+import { applyFixes, toHighContrast, toQuiet } from "./fixes.ts"
 
-export const lasikFlat = {
-  name: "Lasik",
+// Lasik Dark: the base theme plus the hard-coded fixes (see fixes.ts)
+const lasikDark = applyFixes({
+  name: "Lasik Dark",
   type: "dark",
   $schema: "vscode://schemas/color-theme",
   colors: EDITOR_COLORS["DARK"],
   tokenColors: TOKEN_COLORS["DARK"],
+})
+// the other two variants start from Lasik Dark and swap colors
+const lasikDarkQuiet = { ...toQuiet(lasikDark), name: "Lasik Dark Quiet" }
+const lasikDarkHighContrast = { ...toHighContrast(lasikDark), name: "Lasik Dark High Contrast", type: "hcDark" }
+
+// file paths are relative to the project root (run this from there)
+const THEMES: [string, object][] = [
+  ["themes/Lasik-Dark-color-theme.json", lasikDark],
+  ["themes/Lasik-Dark-Quiet-color-theme.json", lasikDarkQuiet],
+  ["themes/Lasik-Dark-High-Contrast-color-theme.json", lasikDarkHighContrast],
+]
+for (const [file, theme] of THEMES) {
+  await Deno.writeTextFile(file, JSON.stringify(theme, null, 2))
+  console.log("wrote", file)
 }
-
-export const lasikHighContrast = {
-  name: "Lasik - High Contrast",
-  type: "dark",
-  $schema: "vscode://schemas/color-theme",
-  colors: EDITOR_COLORS["HC"],
-  tokenColors: TOKEN_COLORS["HC"],
-}
-
-// the file path is relative to the project root
-// the current project root is outside src/
-await Deno.writeTextFile(
-  "themes/Lasik-color-theme.json",
-  JSON.stringify(applyFixes(lasikFlat)) // hard-coded color fixes, see fixes.ts
-)
-
-// // the file path is relative to the project root
-// // the current project root is outside src/
-// await Deno.writeTextFile(
-//   "themes/Lasik-Flat-color-theme.json",
-//   JSON.stringify(lasikFlat)
-// )
-
-// await Deno.writeTextFile(
-//   "themes/Lasik-HighContrast-color-theme.json",
-//   JSON.stringify(lasikHighContrast)
-// )

@@ -1,16 +1,16 @@
 {
   "name": "lasik",
-  "displayName": "Lasik Super Dark",
+  "displayName": "Lasik",
   "description": "A dark, easy on the eyes theme that has decent contrast for coders with sensitive eyes",
   "version": "0.1.4",
   "publisher": "AmnaAkram",
-  "homepage": "https://github.com/aamnah/lasik/blob/main/README.md",
+  "homepage": "https://github.com/aamnah/lasik-vscode-theme#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aamnah/lasik.git"
+    "url": "https://github.com/aamnah/lasik-vscode-theme.git"
   },
   "bugs": {
-    "url": "https://github.com/aamnah/lasik/issues"
+    "url": "https://github.com/aamnah/lasik-vscode-theme/issues"
   },
   "sponsor": {
     "url": "https://github.com/sponsors/aamnah"
@@ -34,21 +34,52 @@
   "contributes": {
     "themes": [
       {
-        "label": "Lasik",
+        "id": "Lasik",
+        "label": "Lasik Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/Lasik-color-theme.json"
+        "path": "./themes/Lasik-Dark-color-theme.json"
+      },
+      {
+        "label": "Lasik Dark Quiet",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Lasik-Dark-Quiet-color-theme.json"
+      },
+      {
+        "label": "Lasik Dark High Contrast",
+        "uiTheme": "hc-black",
+        "path": "./themes/Lasik-Dark-High-Contrast-color-theme.json"
       }
     ],
     "grammars": [
       {
-        "language": "env",
+        "language": "dotenv",
         "scopeName": "source.env",
         "path": "./syntaxes/dotenv/env.tmLanguage.json"
+      },
+      {
+        "language": "asm-nasm",
+        "scopeName": "source.asm.nasm",
+        "path": "./syntaxes/nasm/nasm.tmLanguage.json"
+      },
+      {
+        "language": "toml",
+        "scopeName": "source.toml",
+        "path": "./syntaxes/toml/toml.tmLanguage.json"
+      },
+      {
+        "language": "csv",
+        "scopeName": "text.csv",
+        "path": "./syntaxes/csv/csv.tmLanguage.json"
+      },
+      {
+        "language": "tsv",
+        "scopeName": "text.tsv",
+        "path": "./syntaxes/csv/tsv.tmLanguage.json"
       }
     ],
     "languages": [
       {
-        "id": "env",
+        "id": "dotenv",
         "aliases": [
           ".env",
           "env",
@@ -101,6 +132,74 @@
           ".env.sync",
           ".env.deploy",
           ".env.deployment"
+        ]
+      },
+      {
+        "id": "asm-nasm",
+        "aliases": [
+          "Assembly (x86 NASM)",
+          "nasm",
+          "asm"
+        ],
+        "extensions": [
+          ".asm",
+          ".nasm"
+        ],
+        "configuration": "./syntaxes/nasm/language-configuration.json"
+      },
+      {
+        "id": "toml",
+        "aliases": [
+          "TOML",
+          "toml"
+        ],
+        "extensions": [
+          ".toml"
+        ],
+        "filenames": [
+          "Cargo.lock",
+          "Pipfile",
+          "uv.lock",
+          "poetry.lock"
+        ],
+        "configuration": "./syntaxes/toml/language-configuration.json"
+      },
+      {
+        "id": "csv",
+        "aliases": [
+          "CSV (rainbow)",
+          "csv"
+        ],
+        "extensions": [
+          ".csv"
+        ]
+      },
+      {
+        "id": "tsv",
+        "aliases": [
+          "TSV (rainbow)",
+          "tsv"
+        ],
+        "extensions": [
+          ".tsv",
+          ".tab"
+        ]
+      },
+      {
+        "id": "ini",
+        "extensions": [
+          ".service",
+          ".socket",
+          ".timer",
+          ".target",
+          ".mount",
+          ".automount",
+          ".path",
+          ".slice",
+          ".swap",
+          ".network",
+          ".netdev",
+          ".link"
         ]
       }
     ],
