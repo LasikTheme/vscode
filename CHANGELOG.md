@@ -27,10 +27,35 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Marketplace links now point to the theme's own repository.
 
-## 2025-03-05
+## [0.1.3] - 2025-03-06
 
-- #4 Added support for theme generation using TypeScript and Deno
+### Changed
 
-## [Unreleased]
+- Comments are a lighter color, so they're easier to read.
+- Emphasized (bold and italic) Markdown text no longer gets extra colors (#3).
+- The theme is now generated from TypeScript with Deno, using named color variables (#4), which makes variants possible (#1).
+- A new theme icon.
 
-- Initial release
+### Added
+
+- Install instructions and a link to the Konsole port in the README.
+- Syntax highlighting samples for checking the theme, as a git submodule.
+
+## [0.1.0] - 2024-07-11
+
+### Changed
+
+- Panel colors match the theme. Panels are the views below the editor, like Output and the integrated Terminal.
+
+## [0.0.18] - 2023-12-27
+
+The first release on GitHub. Versions 0.0.1 to 0.0.17 were published to the Marketplace while the theme was being set up (2023-12-24 and 25).
+
+### Added
+
+- A very dark editor and UI.
+- Syntax colors for Markdown, JSON, Bash and Python.
+- Dimmed punctuation: JSON quotes, Markdown markup and code block marks are dimmed, so the keys, values and text stand out.
+- Bash: colors for parameter expansion and command names.
+- Editor selection and highlight colors.
+- README screenshots, a theme icon and a sponsor link.
