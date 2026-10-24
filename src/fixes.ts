@@ -22,14 +22,14 @@ const UI_VALUES: Record<string, string> = {
   "#ff0000": "#a8bcfc", // pure red focus border (a leftover) -> PERIWINKLE
   "#0078d4": "#569cd6", // VS Code blue -> BLUE (buttons, focus, status bar)
   "#026ec1": "#6fb5f1", // button hover -> BLUE_BRIGHT
-  "#f85149": "#e35d7b", // error red -> RED, lifted to 6:1
+  "#f85149": "#d24e6d", // error red -> RED (5.0:1)
   "#2ea043": "#a0c38f", // added (gutter) -> GREEN
 }
 
 // ---- UI colors: set or override single keys
 const UI_KEYS: Record<string, string> = {
-  "editorLineNumber.foreground": "#6976a0", // PERIWINKLE mixed into the background, 4.5:1 (was 1.9)
-  "activityBar.inactiveForeground": "#6976a0", // same, inactive icons (was 1.9)
+  "editorLineNumber.foreground": "#6a78a4", // SLATE_MUTED, 4.7:1 (was 1.9)
+  "activityBar.inactiveForeground": "#6a78a4", // same, inactive icons (was 1.9)
   "editorIndentGuide.background1": "#4f5a7c", // 3:1, the minimum for UI lines (was 2.0)
   "input.placeholderForeground": "#989898", // 4.5:1 on the input background (was 3.3)
   "editor.selectionBackground": "#a8bcfc40", // a bit stronger, so the selection is easy to see
@@ -39,17 +39,17 @@ const UI_KEYS: Record<string, string> = {
   "statusBar.debuggingForeground": "#01030a",
   "statusBarItem.remoteForeground": "#01030a",
   // errors, warnings, info
-  "errorForeground": "#e35d7b",
-  "editorError.foreground": "#e35d7b",
+  "errorForeground": "#d24e6d", // RED
+  "editorError.foreground": "#d24e6d",
   "editorWarning.foreground": "#ffd370", // YELLOW_DEEP
   "editorInfo.foreground": "#569cd6", // BLUE
   // git colors in the file list
   "gitDecoration.addedResourceForeground": "#a0c38f", // GREEN
   "gitDecoration.untrackedResourceForeground": "#a0c38f",
   "gitDecoration.modifiedResourceForeground": "#ffd370", // YELLOW_DEEP
-  "gitDecoration.deletedResourceForeground": "#e35d7b", // RED
+  "gitDecoration.deletedResourceForeground": "#d24e6d", // RED
   "gitDecoration.conflictingResourceForeground": "#c175ea", // MAUVE
-  "gitDecoration.ignoredResourceForeground": "#7583b0", // the comment gray
+  "gitDecoration.ignoredResourceForeground": "#6a78a4", // SLATE_MUTED, the comment gray
   // terminal: base colors for normal, the BRIGHT tier for bright
   "terminal.background": "#01030a",
   "terminal.foreground": "#e8ecfd", // LAVENDER_BRIGHT, not white
@@ -75,14 +75,13 @@ const UI_KEYS: Record<string, string> = {
 
 // ---- syntax colors: replace a value everywhere it's used (case doesn't matter)
 const TOKEN_VALUES: Record<string, string> = {
-  "#a1add8b3": "#7583b0", // comments: see-through 4.9:1 -> solid 5.5:1
-  "#e95678e6": "#e35d7b", // variables, keys, tags: RED lifted to 6:1
-  "#e95678": "#e35d7b", // same red, solid version
+  "#a1add8b3": "#6a78a4", // comments: see-through 4.9:1 -> SLATE_MUTED, solid 4.7:1
+  "#e95678e6": "#d24e6d", // tags, headings: RED (5.0:1)
+  "#e95678": "#d24e6d", // same red, solid version
   "#f9c859": "#ffd370", // Bash $( ) brackets -> YELLOW_DEEP
-  "#d24e6d": "#e35d7b", // Markdown headings: same red
   "#000080": "#569cd6", // "header" was navy on black (1.3:1)
   "#ce6350": "#d98677", // unquoted strings (YAML values etc.) and other string-like tokens -> PEACH (7.5:1)
-  "#646695": "#6f72a1", // regexp: 3.8 -> 4.5
+  "#646695": "#6a78a4", // regexp: 3.8 -> SLATE_MUTED (4.7)
   // dimmed punctuation: still quiet, but 4.5:1 (the muted version of the color it belongs to)
   "#522030": "#338476", // JSON key quotes (was 1.6) -> generated: TEAL mixed into OBSIDIAN to 4.5:1
   "#58423b": "#a5675d", // JSON value quotes (was 2.2)
@@ -95,7 +94,32 @@ const TOKEN_VALUES: Record<string, string> = {
   "#5f838756": "#5a7d81", // Markdown reference [ ]: marks (was 1.5)
   "#2d456b": "#437aa9", // Markdown table pipes (was 2.1)
   "#6b99559a": "#5a8149", // Markdown blockquote > (was 2.8)
-  "#fab795b3": "#fab795", // blockquote text: content, so full color
+  "#fab795b3": "#e2a587", // blockquote text: content, so full color -> TUMBLEWEED
+  // leftover VS Code Dark+ colors -> the base palette color of the same family (all 4.5:1 or more)
+  "#d7ba7d": "#fac29a", // APRICOT
+  "#6796e6": "#569cd6", // BLUE
+  "#b5cea8": "#a0c38f", // GREEN
+  "#e6e6e7": "#cdd2e4", // LAVENDER_MUTED, the text color
+  "#d993ff": "#c175ea", // MAUVE
+  "#b877db": "#c175ea", // MAUVE
+  "#b267e6": "#c175ea", // MAUVE
+  "#d16969": "#d98677", // PEACH
+  "#f09483": "#d98677", // PEACH
+  "#f44747": "#d24e6d", // RED
+  "#25b0bc": "#02bbcc", // SAPPHIRE
+  "#d4d4d4": "#bbbbbb", // SILVER
+  "#c8c8c8": "#bbbbbb", // SILVER
+  "#d9d9da": "#bbbbbb", // SILVER
+  "#999a9d": "#bbbbbb", // SILVER
+  "#9cdcfe": "#4fc1ff", // SKY
+  "#6f72a1": "#6a78a4", // SLATE_MUTED (SLATE itself is 1.9:1, too dark for text)
+  "#808080": "#6a78a4", // SLATE_MUTED
+  "#5f8387": "#4ec9b0", // TEAL
+  "#ffb1a3": "#e2a587", // TUMBLEWEED
+  "#fab795": "#e2a587", // TUMBLEWEED
+  "#cd9731": "#e2a587", // TUMBLEWEED
+  "#dcdcaa": "#ffe2a3", // YELLOW
+  "#ffe998": "#ffe2a3", // YELLOW
 }
 
 // Python docstrings are strings to the grammar, and JSDoc tags have their own scopes,
@@ -115,7 +139,7 @@ const COMMENT_RULE = {
     "comment.block.documentation constant",
     "comment punctuation.definition.comment",
   ],
-  settings: { foreground: "#7583b0", fontStyle: "" }, // "" = upright, overrides italic from other rules
+  settings: { foreground: "#6a78a4", fontStyle: "" }, // "" = upright, overrides italic from other rules
 }
 
 // Strings are YELLOW (#ffe2a3, 16:1); their quotes are a muted yellow at 4.5:1, so they step back
@@ -173,7 +197,7 @@ export function applyFixes(theme: Theme): Theme {
     const fg = settings.foreground?.toLowerCase()
     if (fg && TOKEN_VALUES[fg]) settings.foreground = TOKEN_VALUES[fg]
     // any other see-through color with high opacity (E6 = 90%): just drop the transparency
-    else if (fg && fg.length === 9 && fg.endsWith("e6")) settings.foreground = fg.slice(0, 7)
+    else if (fg && fg.length === 9 && fg.endsWith("e6")) settings.foreground = TOKEN_VALUES[fg.slice(0, 7)] ?? fg.slice(0, 7)
     const isComment = rule.scope === "comment" || (Array.isArray(rule.scope) && rule.scope.includes("comment"))
     if (isComment) settings.fontStyle = "" // upright comments
     return { ...rule, settings }
@@ -207,7 +231,7 @@ function swap(theme: Theme, variant: Variant): Theme {
 }
 
 // Lasik Dark Quiet (opt-in, below WCAG on purpose): punctuation uses the QUIET tier,
-// line numbers and comments are dimmer, variables keep the original RED.
+// line numbers are dimmer. Code colors are the same as Lasik Dark.
 export const QUIET: Variant = {
   tokens: {
     "#338476": "#1c4844", // key quotes -> TEAL_QUIET
@@ -219,8 +243,6 @@ export const QUIET: Variant = {
     "#5a7d81": "#1c4844", // Markdown reference marks -> TEAL_QUIET
     "#437aa9": "#1f3951", // Markdown table pipes -> BLUE_QUIET
     "#5a8149": "#394639", // Markdown blockquote > -> GREEN_QUIET
-    "#7583b0": "#6a78a4", // comments -> SLATE_MUTED (4.7:1)
-    "#e35d7b": "#d24e6d", // variables, keys -> RED
     "#837558": "#5a5140", // string quotes, all languages -> YELLOW_QUIET
   },
   ui: {
@@ -230,7 +252,7 @@ export const QUIET: Variant = {
   },
 }
 
-// Lasik Dark High Contrast: code colors at least 7:1 (the BRIGHT tier), white text,
+// Lasik Dark High Contrast: every syntax color is a BRIGHT palette color (all 7:1 or more), white text,
 // borders around panels (VS Code high contrast themes need contrastBorder).
 export const HIGH_CONTRAST: Variant = {
   colors: {
@@ -242,20 +264,26 @@ export const HIGH_CONTRAST: Variant = {
     "contrastActiveBorder": "#a8bcfc", // PERIWINKLE
     "editor.foreground": "#ffffff",
   },
+  // every syntax color -> the BRIGHT (7:1+) palette color of its color family.
+  // Muted punctuation (quotes, $, Markdown marks) stays at 4.5:1 and is not listed.
   tokens: {
-    "#7583b0": "#8796c4", // comments -> SLATE_BRIGHT (7.1:1)
-    "#cdd2e4": "#ffffff", // variables (text color) -> WHITE
-    "#569cd6": "#6fb5f1", // blue -> BLUE_BRIGHT
-    "#6796e6": "#6fb5f1",
-    "#6f72a1": "#6fb5f1", // regexp
-    "#e35d7b": "#f16a87", // red -> RED_BRIGHT (7.0:1)
-    "#f44747": "#f16a87",
-    "#d16969": "#f16a87",
-    "#b877db": "#d893ff", // mauve -> MAUVE_BRIGHT
-    "#c175ea": "#d893ff", // MAUVE (rainbow CSV) -> MAUVE_BRIGHT
-    "#b267e6": "#d893ff",
-    "#808080": "#bbbbbb", // gray tag punctuation -> SILVER
-    "#5f8387": "#71a69b", // Markdown references -> TEAL_MUTED (7.5:1)
+    "#fac29a": "#ffe4d1", // APRICOT -> APRICOT_BRIGHT
+    "#569cd6": "#6fb5f1", // BLUE -> BLUE_BRIGHT
+    "#a0c38f": "#b9dda8", // GREEN -> GREEN_BRIGHT
+    "#cdd2e4": "#ffffff", // LAVENDER_MUTED (text) -> WHITE
+    "#c175ea": "#d893ff", // MAUVE -> MAUVE_BRIGHT
+    "#d98677": "#f49f8f", // PEACH -> PEACH_BRIGHT
+    "#c586c0": "#df9fda", // PINK -> PINK_BRIGHT
+    "#d24e6d": "#f16a87", // RED -> RED_BRIGHT
+    "#fc7e9b": "#ffaaba", // ROSE -> ROSE_BRIGHT
+    "#02bbcc": "#3fd5e6", // SAPPHIRE -> SAPPHIRE_BRIGHT
+    "#bbbbbb": "#d5d5d5", // SILVER -> SILVER_BRIGHT
+    "#4fc1ff": "#98d8ff", // SKY -> SKY_BRIGHT
+    "#6a78a4": "#8796c4", // SLATE_MUTED (comments) -> SLATE_BRIGHT
+    "#4ec9b0": "#6be3c9", // TEAL -> TEAL_BRIGHT
+    "#e2a587": "#fdbea0", // TUMBLEWEED -> TUMBLEWEED_BRIGHT
+    "#ffe2a3": "#ffeabd", // YELLOW -> YELLOW_BRIGHT
+    // YELLOW_DEEP #ffd370 (Bash $( )) is kept: orange-yellow, 14.5:1
   },
 }
 
