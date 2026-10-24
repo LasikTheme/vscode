@@ -54,7 +54,7 @@ Attention was paid to making arithmetic evaluation, command evaluation, variable
 
 Some elements have been dimmed (for example quotes around strings and property names in JSON and HTML, or punctuation around Markdown elements), to give more emphasis to the actual _keys_ and _values_ and not punctuation marks. The assumption here is that you already have a linter or syntax highlighting good enough to point out a missing punctuation and you don't necessarily need to see them prominently.
 
-This is more readable:
+This is more readable (shown in Lasik Dark Quiet, where quotes are dimmed the most):
 
 ![Dimmed punctuation colors](./images/dimmed-punctuation-colors.png)
 
