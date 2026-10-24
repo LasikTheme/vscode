@@ -4,13 +4,13 @@
   "description": "A dark, easy on the eyes theme that has decent contrast for coders with sensitive eyes",
   "version": "0.2.0",
   "publisher": "AmnaAkram",
-  "homepage": "https://github.com/aamnah/lasik-vscode-theme#readme",
+  "homepage": "https://github.com/LasikTheme/vscode#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aamnah/lasik-vscode-theme.git"
+    "url": "https://github.com/LasikTheme/vscode.git"
   },
   "bugs": {
-    "url": "https://github.com/aamnah/lasik-vscode-theme/issues"
+    "url": "https://github.com/LasikTheme/vscode/issues"
   },
   "sponsor": {
     "url": "https://github.com/sponsors/aamnah"
