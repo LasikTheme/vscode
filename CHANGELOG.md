@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Added
 
-- Three variants: **Lasik Dark** (the default, keeps the theme id so you stay on it), **Lasik Dark Quiet** (dimmer punctuation, line numbers and quotes, below WCAG on purpose) and **Lasik Dark High Contrast** (black background, code at 7:1 or more).
+- Three variants: **Lasik Dark** (the default, keeps the theme id so you stay on it), **Lasik Dark Quiet** (dimmer punctuation, line numbers and quotes, below WCAG on purpose) and **Lasik Dark High Contrast** (black background, code at 7:1 or more) (#1).
 - Built-in syntax highlighting for `.env` files, TOML, x86 NASM assembly, rainbow CSV/TSV and systemd unit files, so you don't need separate extensions for them.
 - Terminal colors (all 16), error, warning and git colors.
 
@@ -19,8 +19,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Quotes are dimmed in every language, not only JSON.
 - Comments, Python docstrings and JSDoc tags all use the comment color, and comments are no longer italic.
 - No pure white text (it glows on a dark background); text is a light lavender.
-- Line numbers, comments and dimmed punctuation now meet WCAG AA (4.5:1).
-- The editor ruler is a faint slate instead of a gray line.
+- Line numbers, comments and dimmed punctuation now meet WCAG AA (4.5:1), so comments are easier to read (#2).
+- The editor ruler is a faint slate instead of a gray line, so it no longer cuts through the text (#5).
 - New screenshots in the README.
 
 ### Fixed
@@ -31,7 +31,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Changed
 
-- Comments are a lighter color, so they're easier to read.
+- Comments are a lighter color, so they're easier to read (#2).
 - Emphasized (bold and italic) Markdown text no longer gets extra colors (#3).
 - The theme is now generated from TypeScript with Deno, using named color variables (#4), which makes variants possible (#1).
 - A new theme icon.
